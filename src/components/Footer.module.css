@@ -1,0 +1,6 @@
+.footer { background: #0a1a3a; color: #cfd8ea; padding: 26px 0; font-size: 14px; }
+.inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.menu { display: flex; gap: 20px; }
+.menu a { color: #cfd8ea; }
+.menu a:hover { color: #fff; }
+@media (max-width: 768px) { .inner { justify-content: center; text-align: center; } }

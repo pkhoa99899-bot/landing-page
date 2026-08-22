@@ -1,0 +1,16 @@
+.header { position: sticky; top: 0; z-index: 50; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 70px; gap: 16px; position: relative; }
+.logo { font-family: var(--font-num), var(--font); font-weight: 800; font-size: 22px; color: var(--blue); letter-spacing: .5px; text-transform: uppercase; white-space: nowrap; }
+.logo span { color: var(--red); }
+.menu { display: flex; gap: 28px; font-weight: 600; font-size: 15px; }
+.menu a { color: var(--text); transition: .2s; }
+.menu a:hover { color: var(--red); }
+.burger { display: none; background: none; border: 0; cursor: pointer; padding: 6px; }
+.burger span { display: block; width: 26px; height: 3px; background: var(--blue); margin: 5px 0; border-radius: 2px; }
+@media (max-width: 768px) {
+  .menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: #fff; flex-direction: column; gap: 0; box-shadow: 0 10px 30px rgba(0,0,0,.12); }
+  .menu.open { display: flex; }
+  .menu li a { display: block; padding: 14px 20px; border-top: 1px solid #eee; }
+  .cta { display: none; }
+  .burger { display: block; }
+}
