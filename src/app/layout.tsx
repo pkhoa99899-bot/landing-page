@@ -4,7 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 
 const GOOGLE_ADS_ID = "AW-18398302220";
-const FACEBOOK_PIXEL_ID = "1722101222442522";
+const FACEBOOK_PIXEL_ID = "4062341890563858";
 
 const kantumruy = Kantumruy_Pro({
   subsets: ["khmer", "latin"],
