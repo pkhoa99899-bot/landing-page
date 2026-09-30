@@ -1,36 +1,42 @@
 import { SITE } from "@/config/site";
+import { format, rich } from "@/i18n/format";
+import type { Dictionary } from "@/i18n/dictionaries";
 import { TelegramIcon, ThumbIcon } from "./Icons";
 import s from "./Hero.module.css";
 
-export default function Hero() {
+export default function Hero({ dict }: { dict: Dictionary }) {
   const { loan } = SITE;
+  const t = dict.hero;
+  const num = (v: string) => <span className="num">{v}</span>;
   return (
     <section className={s.hero} id="top">
       <div className={s.bg} />
       <div className={`container ${s.inner}`}>
         <h1 className={s.title}>
-          ខ្ចីប្រាក់រហ័សបំផុត<br />រហូតដល់ <span className="num">{loan.max}</span><br />គ្រាន់តែមាន iPhone
+          {t.title.map((line, i) => (
+            <span key={i}>{rich(line, { max: num(loan.max) })}{i < t.title.length - 1 && <br />}</span>
+          ))}
         </h1>
 
         <div className={s.row}>
           <ThumbIcon className={s.thumb} />
           <div className={s.sub}>
-            <h3>ទទួលបានប្រាក់ក្នុងថ្ងៃតែមួយ</h3>
-            <p>រហ័ស – ងាយស្រួល – សម្ងាត់</p>
+            <h3>{t.subTitle}</h3>
+            <p>{t.subText}</p>
           </div>
           <ThumbIcon className={`${s.thumb} ${s.flip}`} />
         </div>
 
-        <h4 className={s.support}>គាំទ្រអតិថិជនដែលមាន {loan.device} ឡើងទៅ</h4>
+        <h4 className={s.support}>{format(t.support, { device: loan.device })}</h4>
         <div className={s.meta}>
-          <div><b>ចំនួនកម្ចី:</b> អប្បបរមា <span className="num">{loan.min}</span> – អតិបរមា <span className="num">{loan.max}</span></div>
-          <div><b>រយៈពេល:</b> អប្បបរមា {loan.minTerm} – អតិបរមា {loan.maxTerm}</div>
+          <div><b>{t.amountLabel}</b> {rich(t.amount, { min: num(loan.min), max: num(loan.max) })}</div>
+          <div><b>{t.termLabel}</b> {format(t.term, { min: dict.loan.minTerm, max: dict.loan.maxTerm })}</div>
         </div>
 
         <div className={s.cta}>
-          <a href="#dang-ky" className="btn btn--lg">ចុះឈ្មោះខ្ចីឥឡូវនេះ</a>
+          <a href="#dang-ky" className="btn btn--lg">{t.ctaRegister}</a>
           <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer" className="btn btn--lg btn--ghost">
-            <TelegramIcon /> ជជែកតាម Telegram
+            <TelegramIcon /> {t.ctaTelegram}
           </a>
         </div>
       </div>

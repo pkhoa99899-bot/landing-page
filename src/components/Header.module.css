@@ -14,3 +14,6 @@
   .cta { display: none; }
   .burger { display: block; }
 }
+.actions { display: flex; align-items: center; gap: 12px; }
+.lang { font-weight: 700; font-size: 14px; color: var(--blue); border: 2px solid var(--blue); border-radius: 6px; padding: 6px 12px; white-space: nowrap; transition: .2s; }
+.lang:hover { background: var(--blue); color: #fff; }

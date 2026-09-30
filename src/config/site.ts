@@ -1,5 +1,4 @@
 export const SITE = {
-  name: "ខ្ចីប្រាក់ iCloud",
   phone: "067767674",
   phoneDisplay: "067 767 674",
   telegramUser: "somnangg3",
@@ -9,11 +8,12 @@ export const SITE = {
     { id: "qvfd_nT2Lwc", orientation: "tall" },
   ],
   feedbackPhotos: Array.from({ length: 8 }, (_, i) => `/images/feedback/fb-${i + 1}.jpg`),
-  loan: { min: "100$", max: "1000$", minTerm: "1 ខែ (30 ថ្ងៃ)", maxTerm: "60 ខែ", device: "iPhone 12" },
+  loan: { min: "100$", max: "1000$", device: "iPhone 12" },
 } as const;
 
+/** Nhãn hiển thị lấy từ dictionary theo `key` (dict.nav[key]). */
 export const NAV_LINKS = [
-  { href: "#top", label: "ទំព័រដើម" },
-  { href: "#doi-tuong", label: "អ្នកអាចខ្ចី" },
-  { href: "#dang-ky", label: "ចុះឈ្មោះខ្ចី" },
+  { href: "#top", key: "home" },
+  { href: "#doi-tuong", key: "who" },
+  { href: "#dang-ky", key: "register" },
 ] as const;
