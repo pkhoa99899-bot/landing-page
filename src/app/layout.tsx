@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Kantumruy_Pro, Montserrat } from "next/font/google";
 import Script from "next/script";
-import { LOCALES, hasLocale } from "@/i18n/config";
-import { getDictionary } from "@/i18n/dictionaries";
-import "../globals.css";
+import { en, km } from "@/i18n/dictionaries";
+import "./globals.css";
 
 const GOOGLE_ADS_ID = "AW-18398302220";
 const FACEBOOK_PIXEL_ID = "4062341890563858";
@@ -23,24 +21,15 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-export const dynamicParams = false;
+export const metadata: Metadata = {
+  title: `${en.meta.title} | ${km.siteName}`,
+  description: `${en.meta.description} ${km.meta.description}`,
+};
 
-export function generateStaticParams() {
-  return LOCALES.map((lang) => ({ lang }));
-}
-
-export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
-  const { lang } = await params;
-  if (!hasLocale(lang)) return {};
-  const { meta } = await getDictionary(lang);
-  return { title: meta.title, description: meta.description };
-}
-
-export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
-  const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
+/** Trang song ngữ Khmer + Anh: lang gốc là "en", các đoạn Khmer tự gắn lang="km". */
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={lang} className={`${kantumruy.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
+    <html lang="en" className={`${kantumruy.variable} ${montserrat.variable}`} data-scroll-behavior="smooth">
       <body>
         {children}
         <Script

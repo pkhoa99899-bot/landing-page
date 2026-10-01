@@ -26,3 +26,10 @@ ul { list-style: none; }
 
 .sec-title { text-align: center; font-size: clamp(26px, 4vw, 38px); color: var(--blue); font-weight: 700; margin-bottom: 12px; }
 .sec-desc { text-align: center; color: var(--muted); max-width: 640px; margin: 0 auto 40px; }
+
+/* Song ngữ: dòng tiếng Anh nằm dưới dòng Khmer */
+.bi-en { display: block; font-size: .82em; font-weight: 500; line-height: 1.4; opacity: .9; }
+h1 .bi-en { font-size: .55em; font-weight: 600; margin-top: .35em; }
+h2 .bi-en, h3 .bi-en, h4 .bi-en { font-size: .68em; font-weight: 600; }
+.btn .bi-en { font-size: .78em; font-weight: 600; opacity: .95; }
+.bi-stack { display: block; text-align: center; line-height: 1.3; }

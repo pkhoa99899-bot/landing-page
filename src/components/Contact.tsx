@@ -1,4 +1,5 @@
 import { SITE } from "@/config/site";
+import { bi, inlineBi } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
 import LeadForm from "./LeadForm";
 import { PhoneIcon, PinIcon, TelegramIcon } from "./Icons";
@@ -11,16 +12,16 @@ export default function Contact({ dict }: { dict: Dictionary }) {
       <div className={`container ${s.wrap}`}>
         <LeadForm t={dict.form} />
         <div className={s.info}>
-          <h2>{t.title}</h2>
-          <p>{t.desc}</p>
+          <h2>{bi(t.title)}</h2>
+          <p>{bi(t.desc)}</p>
 
           <div className={s.row}>
             <PinIcon />
-            <div><small>{t.addressLabel}</small><strong>{t.address}</strong></div>
+            <div><small>{inlineBi(t.addressLabel)}</small><strong>{bi(t.address)}</strong></div>
           </div>
           <div className={s.row}>
             <PhoneIcon />
-            <div><small>{t.phoneLabel}</small><a className="num" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a></div>
+            <div><small>{inlineBi(t.phoneLabel)}</small><a className="num" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a></div>
           </div>
           <div className={s.row}>
             <TelegramIcon />

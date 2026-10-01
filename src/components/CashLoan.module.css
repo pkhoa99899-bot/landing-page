@@ -12,6 +12,8 @@
 .featIcon { flex: none; width: 46px; height: 46px; border-radius: 12px; background: var(--blue); display: grid; place-items: center; }
 .featIcon svg { width: 24px; height: 24px; fill: #fff; }
 .feat > div > span { display: block; font-weight: 700; color: var(--blue); font-size: 17px; margin-bottom: 4px; }
+.cash h2 :global(.bi-en) small { font-size: .78em; margin-top: 2px; }
+.line { display: block; }
 .feat p { font-size: 15px; color: var(--muted); line-height: 1.7; }
 @media (max-width: 960px) { .wrap { grid-template-columns: 240px 1fr; gap: 30px; } }
 @media (max-width: 768px) {

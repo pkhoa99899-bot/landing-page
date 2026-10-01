@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WhyUs from "@/components/WhyUs";
@@ -8,17 +7,12 @@ import Conditions from "@/components/Conditions";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatButtons from "@/components/FloatButtons";
-import { hasLocale } from "@/i18n/config";
-import { getDictionary } from "@/i18n/dictionaries";
+import { dict } from "@/i18n/dictionaries";
 
-export default async function Home({ params }: PageProps<"/[lang]">) {
-  const { lang } = await params;
-  if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
-
+export default function Home() {
   return (
     <>
-      <Header dict={dict} lang={lang} />
+      <Header dict={dict} />
       <main>
         <Hero dict={dict} />
         <WhyUs dict={dict} />

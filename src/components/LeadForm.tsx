@@ -1,17 +1,18 @@
 "use client";
 import { useState, type FormEvent } from "react";
 import { SITE } from "@/config/site";
-import { format } from "@/i18n/format";
+import { bi, biLines, biPair, inlineBi, splitBi } from "@/i18n/format";
 import type { Dictionary } from "@/i18n/dictionaries";
 import s from "./Contact.module.css";
 
 type FormText = Dictionary["form"];
 
+/** Nhãn hiển thị song ngữ phía trên ô nhập; placeholder chỉ là gợi ý ngắn. */
 const buildFields = (t: FormText) => [
-  { name: "name", type: "text", placeholder: t.name },
-  { name: "device", type: "text", placeholder: t.device },
-  { name: "amount", type: "text", placeholder: format(t.amount, { min: SITE.loan.min, max: SITE.loan.max }) },
-  { name: "phone", type: "tel", placeholder: t.phone, pattern: "[0-9]{9,10}", maxLength: 10, inputMode: "numeric", title: t.phoneTitle },
+  { name: "name", type: "text", label: t.name },
+  { name: "device", type: "text", label: t.device, placeholder: "iPhone 13 Pro" },
+  { name: "amount", type: "text", label: t.amount, placeholder: `${SITE.loan.min} – ${SITE.loan.max}` },
+  { name: "phone", type: "tel", label: t.phone, placeholder: inlineBi(t.phoneHint), pattern: "[0-9]{9,10}", maxLength: 10, inputMode: "numeric", title: inlineBi(t.phoneTitle) },
 ] as const;
 
 const onlyDigits = (e: React.FormEvent<HTMLInputElement>) => {
@@ -47,17 +48,20 @@ export default function LeadForm({ t }: { t: FormText }) {
   };
 
   const isSending = status === "sending";
+  const error = splitBi(t.error);
+  const telegramLink = <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">Telegram</a>;
 
   return (
     <form className={s.form} onSubmit={handleSubmit}>
-      <h3>{t.title[0]}<br />{t.title[1]}</h3>
-      <p>{t.desc}</p>
+      <h3>{biLines(t.title)}</h3>
+      <p>{bi(t.desc)}</p>
       {buildFields(t).map((f) => (
         <label key={f.name}>
+          <span className={s.caption}>{inlineBi(f.label)}</span>
           <input
             name={f.name}
             type={f.type}
-            placeholder={f.placeholder}
+            placeholder={"placeholder" in f ? f.placeholder : undefined}
             pattern={"pattern" in f ? f.pattern : undefined}
             maxLength={"maxLength" in f ? f.maxLength : undefined}
             inputMode={"inputMode" in f ? f.inputMode : undefined}
@@ -69,14 +73,13 @@ export default function LeadForm({ t }: { t: FormText }) {
         </label>
       ))}
       <button type="submit" className={`btn ${s.submit}`} disabled={isSending}>
-        {isSending ? t.sending : t.submit}
+        <span className="bi-stack">{bi(isSending ? t.sending : t.submit)}</span>
       </button>
-      {status === "success" && <div className={s.ok}>{t.success}</div>}
-      {status === "rate_limited" && <div className={s.err}>{t.rateLimited}</div>}
+      {status === "success" && <div className={s.ok}>{bi(t.success)}</div>}
+      {status === "rate_limited" && <div className={s.err}>{bi(t.rateLimited)}</div>}
       {status === "error" && (
         <div className={s.err}>
-          {t.error}{" "}
-          <a href={SITE.telegramUrl} target="_blank" rel="noopener noreferrer">Telegram</a>
+          {biPair(<>{error[0]} {telegramLink}</>, <>{error[1]} {telegramLink}</>)}
         </div>
       )}
     </form>
